@@ -8,6 +8,8 @@ main = hspec $ do
     describe "day one" $ do
         it "returns correct increment count" $ do
             countIncr sample `shouldBe` 7
+        it "return correct count for part two" $ do
+            partTwo sample `shouldBe` 5
 
 
 

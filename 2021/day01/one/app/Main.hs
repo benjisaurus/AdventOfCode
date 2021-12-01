@@ -4,7 +4,12 @@ import Lib
 
 main :: IO ()
 main =
-    print (countIncr getInput)
+    mapM_ putStr ["Part one: "
+                 ,(show (countIncr getInput))
+                 ,"\nPart two: "
+                 ,(show (partTwo getInput))
+                 ,"\n"
+                 ]
 
 getInput = 
     [

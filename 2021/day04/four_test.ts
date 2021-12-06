@@ -1,5 +1,8 @@
 import { assertEquals } from "https://deno.land/std@0.116.0/testing/asserts.ts";
-import { getFour,getInput,parseNums,parseBoard,initBoardMarks } from "./four.ts";
+import { 
+    getFour,getInput,parseNums,parseBoard,
+    initBoardMarks,markNumber,hasBingo,sumUnmarked
+} from "./four.ts";
 
 Deno.test("get four", () => {
     const res = getFour();
@@ -68,4 +71,122 @@ Deno.test("init mark boards", () => {
         ]
     ];
     assertEquals(expected, res);
+})
+
+Deno.test("mark boards", () => {
+    const boards = [
+        [
+            [ 22, 13, 17, 11, 0 ],
+            [ 8, 2, 23, 4, 24 ],
+            [ 21, 9, 14, 16, 7 ],
+            [ 6, 10, 3, 18, 5 ],
+            [ 1, 12, 20, 15, 19 ]
+      ]
+    ];
+    const markBoards = [
+        [
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ]
+        ]
+    ];
+    const res = markNumber(22, boards, markBoards);
+    assertEquals(1, res);
+    const marked = [
+        [
+            [ 1,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ]
+        ]
+    ];
+    const marked2 = [
+        [
+            [ 1,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ]
+        ]
+    ];
+    assertEquals(marked, markBoards);
+    const res2 = markNumber(99, boards, marked);
+    assertEquals(0, res2);
+    assertEquals(marked2, marked);
+})
+
+Deno.test("has bingo", () => {
+    const b1 = [
+        [
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ]
+        ],
+        [
+            [ 1,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ]
+        ]
+    ];
+    const b2 = [
+        [
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ]
+        ],
+        [
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 1,1,1,1,1 ],
+            [ 0,0,0,0,0 ]
+        ]
+    ];
+    const b3 = [
+        [
+            [ 1,0,0,0,0 ],
+            [ 1,0,0,0,0 ],
+            [ 1,0,0,0,0 ],
+            [ 1,0,0,0,0 ],
+            [ 1,0,0,0,0 ]
+        ],
+        [
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ],
+            [ 0,0,0,0,0 ]
+        ]
+    ];
+    assertEquals(-1, hasBingo(b1));
+    assertEquals(1, hasBingo(b2));
+    assertEquals(0, hasBingo(b3));
+})
+
+Deno.test("sum unmarked", () => {
+    const b1 = [
+        [ 14, 21, 17, 24, 4 ],
+        [ 10, 16, 15, 9, 19 ],
+        [ 18, 8, 23, 26, 20 ],
+        [ 22, 11, 13, 6, 5 ],
+        [ 2, 0, 12, 3, 7 ]
+    ];
+    const m1 = [
+        [ 1, 1, 1, 1, 1 ],
+        [ 0, 0, 0, 1, 0 ],
+        [ 0, 0, 1, 0, 0 ],
+        [ 0, 1, 0, 0, 1 ],
+        [ 1, 1, 0, 0, 1 ]
+    ];
+    const res = sumUnmarked(b1, m1);
+    assertEquals(188, res);
 })

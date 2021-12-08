@@ -1,0 +1,72 @@
+# Laternfish
+
+## Section
+
+```elixir
+# input = "3,4,3,1,2"
+
+input =
+  "2,1,1,4,4,1,3,4,2,4,2,1,1,4,3,5,1,1,5,1,1,5,4,5,4,1,5,1,3,1,4,2,3,2,1,2,5,5,2,3,1,2,3,3,1,4,3,1,1,1,1,5,2,1,1,1,5,3,3,2,1,4,1,1,1,3,1,1,5,5,1,4,4,4,4,5,1,5,1,1,5,5,2,2,5,4,1,5,4,1,4,1,1,1,1,5,3,2,4,1,1,1,4,4,1,2,1,1,5,2,1,1,1,4,4,4,4,3,3,1,1,5,1,5,2,1,4,1,2,4,4,4,4,2,2,2,4,4,4,2,1,5,5,2,1,1,1,4,4,1,4,2,3,3,3,3,3,5,4,1,5,1,4,5,5,1,1,1,4,1,2,4,4,1,2,3,3,3,3,5,1,4,2,5,5,2,1,1,1,1,3,3,1,1,2,3,2,5,4,2,1,1,2,2,2,1,3,1,5,4,1,1,5,3,3,2,2,3,1,1,1,1,2,4,2,2,5,1,2,4,2,1,1,3,2,5,5,3,1,3,3,1,4,1,1,5,5,1,5,4,1,1,1,1,2,3,3,1,2,3,1,5,1,3,1,1,3,1,1,1,1,1,1,5,1,1,5,5,2,1,1,5,2,4,5,5,1,1,5,1,5,5,1,1,3,3,1,1,3,1"
+
+defmodule Population do
+  def incr([], newFish, times, times) do
+    newFish
+  end
+
+  def incr([], newFish, current, times) do
+    incr(newFish, [], current + 1, times)
+  end
+
+  def incr([h | t], newFish, current, times) do
+    case h do
+      0 -> incr(t, newFish ++ [6, 8], current, times)
+      _ -> incr(t, newFish ++ [h - 1], current, times)
+    end
+  end
+
+  def incr(fish, times) do
+    incr(fish, [], 1, times)
+  end
+
+  def fish_count(num, days) do
+    # div(days,7) + div(rem(days, 7), (7 - num))
+    cond do
+      days > num -> 1 + fish_count(6, days - (num + 1)) + fish_count(8, days - (num + 1))
+      true -> 0
+    end
+  end
+
+  # def count_map()
+end
+
+input_list =
+  String.split(input, ",")
+  |> Enum.map(&String.to_integer/1)
+
+# Part 1
+# input_list
+# |> Population.incr(80)
+# |> Enum.count
+# |> IO.puts
+
+# Part 2
+num_days = 256
+
+counts = %{
+  0 => Population.fish_count(0, num_days),
+  1 => Population.fish_count(1, num_days),
+  2 => Population.fish_count(2, num_days),
+  3 => Population.fish_count(3, num_days),
+  4 => Population.fish_count(4, num_days),
+  5 => Population.fish_count(5, num_days),
+  6 => Population.fish_count(6, num_days),
+  7 => Population.fish_count(7, num_days),
+  8 => Population.fish_count(8, num_days),
+  9 => Population.fish_count(9, num_days)
+}
+
+Enum.count(input_list) +
+  (input_list
+   |> Enum.map(fn x -> Map.get(counts, x) end)
+   |> Enum.sum())
+```

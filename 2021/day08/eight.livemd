@@ -1,0 +1,120 @@
+<!-- livebook:{"persist_outputs":true} -->
+
+# AOC 2021 Day 8
+
+## Setup
+
+```elixir
+Mix.install([:kino])
+```
+
+```output
+:ok
+```
+
+```elixir
+input = Kino.Input.textarea("Paste Input:")
+```
+
+## Part 1
+
+```elixir
+input = Kino.Input.read(input)
+
+segment_counts = %{
+  0 => 6,
+  1 => 2,
+  2 => 5,
+  3 => 5,
+  4 => 4,
+  5 => 5,
+  6 => 6,
+  7 => 3,
+  8 => 7,
+  9 => 6
+}
+
+# unique = [1, 4, 7, 8]
+unique = [2, 4, 3, 7]
+
+segments =
+  input
+  |> String.split("\n")
+  |> Enum.map(fn x -> String.split(x, "|") |> List.last() end)
+  |> Enum.filter(fn x -> x != "" end)
+  |> Enum.map(fn c -> String.split(c, " ") |> Enum.map(fn i -> String.length(i) end) end)
+  |> Enum.map(fn digit_list ->
+    Enum.filter(digit_list, fn digit -> Enum.member?(unique, digit) end)
+    |> Enum.count()
+  end)
+  |> Enum.sum()
+```
+
+```output
+247
+```
+
+## Part 2
+
+```elixir
+input
+|> String.replace(" |\n", " | ")
+|> String.split("\n")
+|> Enum.map(&String.split(&1, " | "))
+|> Enum.map(fn [patterns, numbers] ->
+  patterns = patterns |> String.split(" ") |> Enum.map(&String.to_charlist/1)
+  numbers = numbers |> String.split(" ") |> Enum.map(&String.to_charlist/1)
+
+  [one] = Enum.filter(patterns, &(length(&1) == 2))
+  [four] = Enum.filter(patterns, &(length(&1) == 4))
+  [seven] = Enum.filter(patterns, &(length(&1) == 3))
+  [eight] = Enum.filter(patterns, &(length(&1) == 7))
+
+  [six] =
+    Enum.filter(patterns, &(length(&1) == 6))
+    |> Enum.filter(&match?([], (eight -- &1) -- seven))
+
+  [five] =
+    Enum.filter(patterns, &(length(&1) == 5))
+    |> Enum.filter(&match?([], &1 -- six))
+
+  [nine] =
+    Enum.filter(patterns, &(length(&1) == 6))
+    |> Enum.filter(&match?([_], (eight -- &1) -- four))
+
+  [zero] =
+    Enum.filter(patterns, &(length(&1) == 6))
+    |> Enum.filter(&match?([], (eight -- &1) -- five))
+
+  [three] =
+    Enum.filter(patterns, &(length(&1) == 5))
+    |> Enum.filter(&match?([_], &1 -- five))
+
+  [two] =
+    Enum.filter(patterns, &(length(&1) == 5))
+    |> Enum.filter(&match?([_, _], &1 -- five))
+
+  [d1, d2, d3, d4] = numbers
+
+  num_display = %{
+    Enum.sort(zero) => 0,
+    Enum.sort(one) => 1,
+    Enum.sort(two) => 2,
+    Enum.sort(three) => 3,
+    Enum.sort(four) => 4,
+    Enum.sort(five) => 5,
+    Enum.sort(six) => 6,
+    Enum.sort(seven) => 7,
+    Enum.sort(eight) => 8,
+    Enum.sort(nine) => 9
+  }
+
+  1000 * num_display[Enum.sort(d1)] + 100 * num_display[Enum.sort(d2)] +
+    10 * num_display[Enum.sort(d3)] + num_display[Enum.sort(d4)]
+end)
+|> Enum.sum()
+```
+
+```output
+933305
+```

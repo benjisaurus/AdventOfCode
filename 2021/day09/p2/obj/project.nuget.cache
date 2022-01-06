@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "1QBmmSULW3JtZidkHxEmbQx9y630IX19iUdxjhC4kEmBs284Q7IsahuPnBdN9aSH/etlG3TeyISEonIlOAasLQ==",
+  "success": true,
+  "projectFilePath": "/home/ijneb/work/aoc/2021/day09/p2/p2.fsproj",
+  "expectedPackageFiles": [
+    "/home/ijneb/.nuget/packages/fsharp.core/5.0.0/fsharp.core.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

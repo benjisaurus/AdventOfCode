@@ -1,0 +1,45 @@
+# Smoke Basin
+
+## Setup
+
+```elixir
+Mix.install([:kino])
+```
+
+```elixir
+input = Kino.Input.textarea("Paste Input:")
+```
+
+```elixir
+input = Kino.Input.read(input)
+
+grid =
+  for {line, row} <- Enum.with_index(String.split(input, "\n", trim: true)),
+      {val, col} <- Enum.with_index(String.to_charlist(line)),
+      into: %{} do
+    {{row, col}, val - ?0}
+  end
+
+get_max = fn {r, c} -> {r + 1, c + 1} end
+
+{num_rows, num_cols} = Map.keys(grid) |> Enum.max()
+
+defmodule Part1 do
+  def get_neighbors({x, y}, num_rows, num_cols) do
+    [{x, y + 1}, {x, y - 1}, {x - 1, y}, {x + 1, y}]
+    |> Enum.filter(fn {xt, yt} ->
+      xt >= 0 and yt >= 0 and xt <= num_rows and yt <= num_cols
+    end)
+  end
+end
+
+grid
+|> Map.keys()
+|> Enum.filter(fn p ->
+  Map.get(grid, p) <
+    Part1.get_neighbors(p, num_rows, num_cols) |> Enum.map(&Map.get(grid, &1)) |> Enum.min()
+end)
+|> Enum.map(&Map.get(grid, &1))
+|> Enum.map(&(&1 + 1))
+|> Enum.sum()
+```

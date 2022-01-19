@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"Benjamin Koger"
+	],
+	"copyright": "Copyright © 2022, Benjamin Koger",
+	"description": "A minimal D application.",
+	"license": "proprietary",
+	"name": "origami"
+}

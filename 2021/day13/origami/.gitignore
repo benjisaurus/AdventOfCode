@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/origami
+origami.so
+origami.dylib
+origami.dll
+origami.a
+origami.lib
+origami-test-*
+*.exe
+*.o
+*.obj
+*.lst

@@ -1,0 +1,97 @@
+# Untitled notebook
+
+## Setup
+
+```elixir
+Mix.install([:kino])
+```
+
+```elixir
+input = Kino.Input.textarea("Paste Input:")
+```
+
+```elixir
+defmodule Paths do
+  def get_conns([], conns) do
+    conns
+  end
+
+  def get_conns([h | t], conns) do
+    [fst | rest] = h
+
+    snd =
+      case Enum.count(rest) do
+        0 -> ""
+        _ -> List.first(rest)
+      end
+
+    new_conns = Map.update(conns, fst, [snd], fn e -> [snd | e] end)
+    get_conns(t, Map.update(new_conns, snd, [fst], fn e -> [fst | e] end))
+  end
+
+  def get_paths([], complete, _conns) do
+    complete
+  end
+
+  def get_paths([h | t], complete, conns) do
+    [last | _] = h
+
+    next_nodes =
+      Map.get(conns, last)
+      |> Enum.map(fn node ->
+        case node == String.upcase(node) or !Enum.member?(h, node) do
+          true -> [node | h]
+          false -> []
+        end
+      end)
+      |> Enum.filter(fn n -> n != [] end)
+
+    new_complete = Enum.filter(next_nodes, fn n -> Enum.member?(n, "end") end) ++ complete
+    new_to_check = Enum.filter(next_nodes, fn n -> !Enum.member?(n, "end") end) ++ t
+    get_paths(new_to_check, new_complete, conns)
+  end
+
+  def only_one_small(node_list) do
+    small_counts =
+      Enum.filter(node_list, fn n -> n == String.downcase(n) end)
+      |> Enum.reduce(%{}, fn x, acc -> Map.update(acc, x, 1, &(&1 + 1)) end)
+      |> Map.values()
+
+    Enum.sum(small_counts) < Enum.count(small_counts) + 2
+  end
+
+  def get_paths2([], complete, _conns) do
+    complete
+  end
+
+  def get_paths2([h | t], complete, conns) do
+    [last | _] = h
+
+    next_nodes =
+      Map.get(conns, last)
+      |> Enum.map(fn node ->
+        case node == String.upcase(node) or !Enum.member?(h, node) or Paths.only_one_small(h) do
+          true -> [node | h]
+          false -> []
+        end
+      end)
+      |> Enum.filter(fn n -> n != [] end)
+
+    new_complete = Enum.filter(next_nodes, fn n -> Enum.member?(n, "end") end) ++ complete
+    new_to_check = Enum.filter(next_nodes, fn n -> !Enum.member?(n, "end") end) ++ t
+    get_paths(new_to_check, new_complete, conns)
+  end
+end
+
+conns =
+  Kino.Input.read(input)
+  |> String.split("\n")
+  |> Enum.map(fn p -> String.split(p, "-") end)
+  |> Paths.get_conns(%{})
+
+Paths.get_paths([["start"]], [], conns) |> Enum.count() |> IO.inspect()
+
+Paths.get_paths2([["start"]], [], conns)
+
+# Paths.only_one_small(["end", "A", "b", "A", "c", "A", "start", "b", "c"])
+```

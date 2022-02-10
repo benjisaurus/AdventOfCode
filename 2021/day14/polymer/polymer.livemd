@@ -1,0 +1,86 @@
+# Polymers
+
+## Setup
+
+```elixir
+Mix.install([:kino])
+```
+
+```elixir
+input = Kino.Input.textarea("Paste Input:")
+```
+
+```elixir
+[init_form | rule_txt] = Kino.Input.read(input) |> String.split("\n\n")
+
+rules =
+  rule_txt
+  |> hd
+  |> String.split(["\n", " -> "])
+  |> Enum.chunk_every(2)
+  |> Map.new(fn [a, b] -> {a, b} end)
+```
+
+```elixir
+defmodule Polymer do
+  def subStep([ch | []], newForm, rules) do
+    [ch | newForm] |> Enum.reverse()
+  end
+
+  def subStep([ch1 | t], newForm, rules) do
+    [ch2 | rest] = t
+    key = to_string([ch1] ++ [ch2])
+    form = to_charlist(Map.get(rules, key)) ++ [ch1] ++ newForm
+    subStep([ch2 | rest], form, rules)
+  end
+
+  def stepTimes(0, form, _rules) do
+    form
+  end
+
+  def stepTimes(num, form, rules) do
+    # IO.puts(num)
+    stepTimes(num - 1, subStep(form, [], rules), rules)
+  end
+end
+```
+
+```elixir
+form = to_charlist(init_form)
+# form = Polymer.subStep(form, [], rules)
+
+{min, max} =
+  Polymer.stepTimes(10, form, rules) |> Enum.frequencies() |> Map.values() |> Enum.min_max()
+
+max - min
+```
+
+```elixir
+rules =
+  rule_txt
+  |> hd
+  |> String.split("\n")
+  |> Map.new(fn <<c1, c2, " -> ", oc>> -> {[c1, c2], oc} end)
+
+form = to_charlist(init_form) |> Enum.chunk_every(2, 1, [0]) |> Enum.frequencies()
+
+{{_, mins}, {_, maxs}} =
+  1..40
+  |> Enum.reduce(form, fn _, form ->
+    Enum.reduce(form, %{}, fn {[c1, c2] = pair, count}, acc ->
+      case rules do
+        %{^pair => oc} ->
+          acc
+          |> Map.update([c1, oc], count, &(&1 + count))
+          |> Map.update([oc, c2], count, &(&1 + count))
+
+        %{} ->
+          Map.put(acc, pair, count)
+      end
+    end)
+  end)
+  |> Enum.group_by(&hd(elem(&1, 0)), &elem(&1, 1))
+  |> Enum.min_max_by(fn {_, counts} -> Enum.sum(counts) end)
+
+Enum.sum(maxs) - Enum.sum(mins)
+```

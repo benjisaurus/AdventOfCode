@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/polymer
+polymer.so
+polymer.dylib
+polymer.dll
+polymer.a
+polymer.lib
+polymer-test-*
+*.exe
+*.o
+*.obj
+*.lst

@@ -1,0 +1,48 @@
+# Chitons
+
+## Setup
+
+```elixir
+Mix.install([:kino])
+```
+
+```elixir
+input = Kino.Input.textarea("Paste Input:")
+```
+
+```elixir
+input_grid = Kino.Input.read(input) |> String.split("\n") |> Enum.map(&to_charlist/1)
+
+grid =
+  for r <- 0..(length(input_grid) - 1), c <- 0..(length(hd(input_grid)) - 1) do
+    {val, _} =
+      [Enum.at(Enum.at(input_grid, r), c)]
+      |> to_string
+      |> Integer.parse()
+
+    {[r, c], val}
+  end
+  |> Enum.into(%{})
+
+rowMax = grid |> Map.keys() |> Enum.map(&hd/1) |> Enum.max()
+colMax = grid |> Map.keys() |> Enum.map(fn [_, b] -> b end) |> Enum.max()
+```
+
+```elixir
+defmodule Chiton do
+  def getNeighbors([r, c], rMax, cMax) do
+    for new_r <- [r, r + 1],
+        new_c <- [c, c + 1],
+        [new_r, new_c] != [r, c],
+        new_r == r or new_c == c,
+        new_r <= rMax,
+        new_c <= cMax do
+      [new_r, new_c]
+    end
+  end
+end
+```
+
+```elixir
+Chiton.getNeighbors([0, 0], 9, 9)
+```

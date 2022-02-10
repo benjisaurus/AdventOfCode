@@ -1,0 +1,1 @@
+/home/ijneb/work/aoc/2021/day15/kotlin/chiton/build/classes/kotlin/main/MainKt.class

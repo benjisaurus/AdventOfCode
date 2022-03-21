@@ -1,0 +1,37 @@
+# Day 16
+
+## Setup
+
+```elixir
+Mix.install([:kino])
+```
+
+```elixir
+input = Kino.Input.textarea("Paste Input:")
+```
+
+```elixir
+input =
+  Kino.Input.read(input)
+  |> to_charlist
+  |> Enum.map(fn c -> Integer.parse(<<c>>, 16) |> Tuple.to_list() |> hd end)
+  |> Enum.map(fn n -> Integer.to_string(n, 2) end)
+  |> Enum.map(fn b -> String.pad_leading(b, 4, "0") end)
+  |> Enum.join()
+```
+
+```elixir
+<<p_ver::binary-size(3), p_type::binary-size(3), p_rest::binary>> = input
+
+defmodule Packet do
+  def literal_length(bin_str), do: literal_length(to_charlist(bin_str), 0)
+  def literal_length([?0 | _rest], count), do: count + 5
+
+  def literal_length([?1 | rest], count) do
+    literal_length(Enum.slice(rest, 4..length(rest)), count + 5)
+  end
+end
+
+Packet.literal_length(p_rest)
+# p_rest
+```

@@ -1,0 +1,119 @@
+2022.03.09 13:44:27 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/ijneb/work/aoc/2021/day16/.metals/lsp.trace.json or /home/ijneb/.cache/metals/lsp.trace.json[0m
+2022.03.09 13:44:28 INFO  logging to file /home/ijneb/work/aoc/2021/day16/.metals/metals.log[0m
+2022.03.09 13:44:28 INFO  Started: Metals version 0.11.2 in workspace '/home/ijneb/work/aoc/2021/day16' for client Visual Studio Code 1.63.1.[0m
+2022.03.09 13:44:28 INFO  Parse release: 11.0.11[0m
+2022.03.09 13:44:31 INFO  time: initialize in 3.1s[0m
+2022.03.09 13:44:32 WARN  Build server is not auto-connectable.[0m
+2022.03.09 13:46:22 INFO  no build target found for /home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc. Using presentation compiler with project's scala-library version: 3.1.1[0m
+2022.03.09 13:46:24 INFO  time: code lens generation in 5.48s[0m
+2022.03.09 13:46:26 INFO  no build target found for /home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc. Using presentation compiler with project's scala-library version: 3.1.1[0m
+2022.03.09 13:46:26 INFO  time: evaluated worksheet 'packet.worksheet.sc.worksheet.sc' in 8.41s[0m
+2022.03.09 13:46:27 INFO  time: evaluated worksheet 'packet.worksheet.sc.worksheet.sc' in 0.65s[0m
+Mar 09, 2022 1:46:34 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9
+[31merror[39m: packet.worksheet.sc.worksheet.sc:2:39: 
+Found:    (ch : Char)
+Required: String
+    hexStr.map(ch => Integer.parseInt(ch, 16).toBinaryString)
+                                      ^^
+2022.03.09 13:53:29 INFO  time: evaluated worksheet 'packet.worksheet.sc.worksheet.sc' in 0.79s[0m
+[31merror[39m: packet.worksheet.sc.worksheet.sc:2:16: 
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt(ch.toString, 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2022.03.09 13:54:00 INFO  time: evaluated worksheet 'packet.worksheet.sc.worksheet.sc' in 0.34s[0m
+[31merror[39m: packet.worksheet.sc.worksheet.sc:2:39: 
+Found:    (ch : Char)
+Required: String
+    hexStr.map(ch => Integer.parseInt(ch, 16).toBinaryString)
+                                      ^^
+2022.03.09 13:54:21 INFO  time: evaluated worksheet 'packet.worksheet.sc.worksheet.sc' in 0.34s[0m
+[31merror[39m: packet.worksheet.sc.worksheet.sc:2:16: 
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2022.03.09 13:54:52 INFO  time: evaluated worksheet 'packet.worksheet.sc.worksheet.sc' in 0.34s[0m
+2022.03.09 14:08:34 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:08:34 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:08:34 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:08:35 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:08:35 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:08:35 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:08:38 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:08:38 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:09:37 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:09:37 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:09:38 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:09:38 INFO  file:///home/ijneb/work/aoc/2021/day16/packet.worksheet.sc.worksheet.sc:2:16: stale mdoc error:
+Found:    Char => String
+Required: Char => Char
+    hexStr.map(ch => Integer.parseInt((ch.toString), 16).toBinaryString)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+2022.03.09 14:10:01 INFO  time: evaluated worksheet 'packet.worksheet.sc.worksheet.sc' in 0.72s[0m
+[31merror[39m: packet.worksheet.sc.worksheet.sc:5:1: 
+value hexToBin is not a member of String
+"D2FE28".hexToBin
+^^^^^^^^^^^^^^^^^
+2022.03.09 14:10:31 INFO  time: evaluated worksheet 'packet.worksheet.sc.worksheet.sc' in 0.3s[0m
+2022.03.09 14:10:58 INFO  time: evaluated worksheet 'packet.worksheet.sc.worksheet.sc' in 0.98s[0m
+2022.03.09 14:11:36 INFO  time: evaluated worksheet 'packet.worksheet.sc.worksheet.sc' in 0.58s[0m
+2022.03.10 18:13:57 INFO  shutting down Metals[0m
+2022.03.10 18:13:57 ERROR Unexpected error initializing server
+org.eclipse.lsp4j.jsonrpc.ResponseErrorException: Request window/showMessageRequest failed with message: Canceled
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleResponse(RemoteEndpoint.java:209)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:193)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.lang.Thread.run(Thread.java:829)
+[0m

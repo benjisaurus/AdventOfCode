@@ -1,0 +1,9 @@
+#lang racket
+
+(require srfi/13)
+
+(define (hex->bin str)
+  (string-join (map
+   (lambda (c)
+     (string-pad (number->string (string->number (string c) 16) 2) 4 #\0))
+   (string->list str)) ""))
